@@ -93,12 +93,15 @@ public class LinkedList {
 			this.last = insertedNode;
 		}
 		//Adding at the beginning (index == 0)
-		else if(index == 0) {
+		if(index == 0) {
 			insertedNode.next = this.first;
-			first = insertedNode;
+			this.first = insertedNode;
+			if(this.size == 0){
+				this.last = insertedNode;
+			}
 		}
 		//Adding at the end (index == size)
-		else if(index == size) {
+		if(index == size) {
 			last.next = insertedNode;
 		    last = insertedNode;
 		}
@@ -131,7 +134,7 @@ public class LinkedList {
 	 *        the given memory block
 	 */
 	public void addFirst(MemoryBlock block) {
-		add(1, block);
+		add(0, block);
 	}
 
 	/**
@@ -160,7 +163,7 @@ public class LinkedList {
 	 */
 	public int indexOf(MemoryBlock block) {
 		Node currNode = this.first;
-		for(int i = 0; i < size; i++ ) {
+		for(int i = 0; i < size; i++) {
 			if((block == null && currNode.block == null) || (block != null && currNode.block.equals(block))) {
 				return i;
 		    }
