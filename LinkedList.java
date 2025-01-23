@@ -88,24 +88,20 @@ public class LinkedList {
 			throw new IllegalArgumentException();
 		}
 		Node insertedNode = new Node(block);
-
+		if(this.size == 0) {
+			this.first = insertedNode;
+			this.last = insertedNode;
+		}
 		//Adding at the beginning (index == 0)
-		if(index == 0) {
+		else if(index == 0) {
 			insertedNode.next = this.first;
 			first = insertedNode;
-			if(size == 0) {
-				last = insertedNode;
-			}
 		}
-		
 		//Adding at the end (index == size)
-		if(index == size) {
-			if(last != null) {
-				last.next = insertedNode;
-			}
-		last.next = insertedNode;
+		else if(index == size) {
+			last.next = insertedNode;
+		    last = insertedNode;
 		}
-
 		//Adding at the middle 
 		else {
 		Node current  = getNode(index - 1);
