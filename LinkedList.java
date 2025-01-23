@@ -162,6 +162,9 @@ public class LinkedList {
 	 * @return the index of the block, or -1 if the block is not in this list
 	 */
 	public int indexOf(MemoryBlock block) {
+		if (block == null) {
+			throw new IllegalArgumentException("Cannot remove null block.");
+		}
 		for(int i = 0; i < size; i++) {
 			if(getBlock(i).equals(block)) {
 				return i;
@@ -177,6 +180,9 @@ public class LinkedList {
 	 *        the node that will be removed from this list
 	 */
 	public void remove(Node node) {
+		if (node == null) {
+			throw new IllegalArgumentException("Node cannot be null.");
+		}
 		int index = indexOf(node.block);
 
 		if (index == -1) {
@@ -186,7 +192,7 @@ public class LinkedList {
 		if(index == 0) {
 			this.first = this.first.next;
 			if (size == 1) { 
-				last = null;
+				this.last = null;
 			}
 		} else {
 		Node prev = getNode(index - 1);
@@ -211,6 +217,9 @@ public class LinkedList {
 				"index must be between 0 and size");
 		}
 		Node toRemovenode = getNode(index);
+		if (getNode(index) == null) {
+			throw new IllegalArgumentException("Node does not exist at index " + index);
+		}
 		remove(toRemovenode);
 	}
 
