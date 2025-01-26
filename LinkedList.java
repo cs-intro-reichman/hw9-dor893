@@ -97,9 +97,9 @@ public class LinkedList {
 			}
 		}
 		//Adding at the end (index == size)
-		else if(index == size) {
-			last.next = insertedNode;
-		    last = insertedNode;
+		else if(index == this.size) {
+			this.last.next = insertedNode;
+		    this.last = insertedNode;
 		}
 		//Adding at the middle 
 		else {
@@ -159,9 +159,6 @@ public class LinkedList {
 	 * @return the index of the block, or -1 if the block is not in this list
 	 */
 	public int indexOf(MemoryBlock block) {
-		if (block == null) {
-			throw new IllegalArgumentException("index must be between 0 and size");
-		}
 		for(int i = 0; i < size; i++) {
 			if(getBlock(i).equals(block)) {
 				return i;
@@ -248,6 +245,7 @@ public class LinkedList {
 	String result = "";
 	while (listIter.hasNext()) {
 		result += listIter.current.block;
+		listIter.next();
 		if(listIter.hasNext()) {
 			result += " ";
 		}
