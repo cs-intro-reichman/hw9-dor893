@@ -58,6 +58,9 @@ public class MemorySpace {
 	 * @return the base address of the allocated block, or -1 if unable to allocate
 	 */
 	public int malloc(int length) {	
+		if(freeList.getFirst() == null) {
+			return -1;
+		}
 		Node curreNode = freeList.getFirst();
 		for(int i = 0; i < freeList.getSize(); i++) {
 			MemoryBlock memoryBlock = curreNode.block;
@@ -92,7 +95,7 @@ public class MemorySpace {
 		}
 		
 		Node currNode = allocatedList.getFirst();
-		for(int i = 0; i < allocatedList.getSize(); i++) {
+		while (currNode != null) {
 			MemoryBlock alloBlock = currNode.block;
 			if (alloBlock.baseAddress == address) {
 				allocatedList.remove(currNode);
